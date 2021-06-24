@@ -7,37 +7,61 @@ server:
 
 ## Database
 spring:
+  cache:
+    type: redis
+  redis:
+    host: {YOUR REDIS HOST URL}
+    port: 6379
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: {YOUR MAIL USERNAME}
+    password: {YOUR MAIL PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://blockduce.c0pmibo6dwxp.ap-northeast-2.rds.amazonaws.com:3306/blockduce?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: j4b107blockduce!!
+    url: jdbc:mysql://{YOUR DB URL}/blockduce?serverTimezone=UTC&characterEncoding=UTF-8
+    username: {YOUR DB USERNAME}
+    password: {YOUR DB PASSWORD}
 
   jpa:
-#    generate-ddl: true
+    #    generate-ddl: true
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
     #    hiberanate:
     #      ddl-auto: create
     properties:
       hibernate:
-#        show_sql: true
-        format_sql: true
+        #        show_sql: true
+        #        format_sql: true
         default_batch_fetch_size: 100
-
+#jwt
+jwt:
+  secret: {YOUR JWT SECRET}
+#logging
 logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
 
+#file
+file:
+  path: src/main/resource/blockduce/
+
 # AWS S3
 cloud:
   aws:
     credentials:
-      accessKey: AKIAYL2LDM2UCG2IVBEY
-      secretKey: pQo5UhNLqZxQvNuzIm+eCn+fNPTBPxG+FSWSJZHA
+      accessKey: {YOUR AWS S3 ACCESSKEY}
+      secretKey: {YOUR AWS S3 SECRETKEY}
     s3:
-      bucket: blockduce-image
+      bucket: {YOUR AWS S3 BUCKET}
     region:
       static: ap-northeast-2
     stack:
